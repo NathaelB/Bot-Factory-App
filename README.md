@@ -1,5 +1,2 @@
-# @DiscordFactory/Factory
-
-## License
-
-[MIT](./LICENSE) License © 2021 [Baptiste Parmantier](https://github.com/LeadcodeDev)
+# Bot Factory App
+Author: @NathaelBonnal
