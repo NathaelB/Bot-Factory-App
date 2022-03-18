@@ -1,5 +1,5 @@
 import Ticket from "App/database/models/Ticket";
-import {User} from "discord.js";
+import {Interaction, TextChannel, User} from "discord.js";
 
 export default class TicketBuilder {
 
@@ -38,8 +38,10 @@ export default class TicketBuilder {
         })
     }
 
-    public static async delete (id: string): Promise<{$deleted: boolean}> {
-        const ticket = await this.get(id)
+    public static async remove (id: string, interaction: Interaction): Promise<{$deleted: boolean}> {
+        const ticket = await this.get(id) as Ticket
+        const channel = await interaction.guild!.channels.resolve(id) as TextChannel
+        await channel.delete()
         return await ticket.delete()
     }
 }
