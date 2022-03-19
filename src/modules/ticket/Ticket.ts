@@ -11,6 +11,7 @@ import Config from "App/utils/Config";
 import {JsonObject} from "App/types";
 import {Colors} from "@discord-factory/colorize";
 import TicketBuilder from "App/builder/Ticket";
+import {openTicket} from "App/modules/ticket/types";
 
 const roleAdmin: string = Config.get('ROLE_ADMIN')
 
@@ -54,17 +55,11 @@ export default class Ticket extends BaseCommand {
       color: Colors.CYAN_400
     })
 
-    const button = new MessageButton({
-      type: "BUTTON",
-      label: "Open Ticket",
-      customId: "ticket-open",
-      style: "SUCCESS"
-    })
 
     await channel.send({
       embeds: [embed],
       components: [new MessageActionRow({
-        components: [button]
+        components: [openTicket]
       })]
     })
 
