@@ -2,7 +2,6 @@ import { Event, BaseEvent } from 'ioc:factory/Core/Event'
 import {
   CommandInteraction,
   GuildMember,
-  Interaction,
   Message,
   MessageEmbed,
   Role,
@@ -19,13 +18,17 @@ export default class AddMember extends BaseEvent {
   public async run (interaction: CommandInteraction): Promise<void> {
     if (!interaction.isButton()) return
     if (interaction.customId === "ticket-add-member") {
+
       const roleSupport = await interaction.guild!.roles.resolve(Config.get('ROLE_SUPPORT')) as Role
       const ticket = await TicketBuilder.get(interaction.channelId) as Ticket
       const member = await interaction.guild!.members.resolve(interaction.user.id) as GuildMember
+
       if (ticket.user_id === interaction.user.id || member.roles.cache.has(roleSupport.id)) {
-        const filter = () => {
-          return ticket.user_id === interaction.user.id || member.roles.cache.has(roleSupport.id)
+
+          const filter = (message: Message) => {
+          return message.author.id === interaction.user.id
         }
+
         await interaction.reply({
           embeds: [new MessageEmbed({
             description: "Veuillez indiquer l'id de l'utilisateur",
@@ -33,6 +36,7 @@ export default class AddMember extends BaseEvent {
           })],
           ephemeral: true
         })
+
         const channel = interaction.channel as TextChannel
         interaction.channel!
             .createMessageCollector({filter, max: 1,})
@@ -44,7 +48,6 @@ export default class AddMember extends BaseEvent {
                     description: "L'utilisateur n'existe pas !",
                     color: Colors.INVISIBLE
                   })],
-
                 })
                 return
               }
@@ -62,7 +65,7 @@ export default class AddMember extends BaseEvent {
                     CREATE_INSTANT_INVITE: false,
                     MENTION_EVERYONE: false
                   }
-              );
+              )
             })
         return
       }
