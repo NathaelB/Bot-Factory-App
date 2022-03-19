@@ -11,6 +11,7 @@ import TicketBuilder from "App/builder/Ticket";
 import Config from "App/utils/Config";
 import {Application} from "@discord-factory/core-next";
 import {Colors} from "@discord-factory/colorize";
+import {addMember, closeButton, removeMember} from "App/modules/ticket/types";
 
 @Event('interactionCreate')
 export default class OpenTicket extends BaseEvent {
@@ -42,19 +43,15 @@ export default class OpenTicket extends BaseEvent {
 
         await TicketBuilder.init(channel.id, interaction.user)
 
-        const closeButton = new MessageButton({
-          style: 'SECONDARY',
-          emoji: '❌',
-          customId: 'closeTicket'
-        })
+
         const row = new MessageActionRow({
           type: 'ACTION_ROW',
-          components: [closeButton]
+          components: [closeButton, addMember, removeMember]
         })
 
         const msg = new MessageEmbed({
           author: {name: `Ticket de ${interaction.user.username}`, iconURL: `${interaction.user!.displayAvatarURL()}`},
-          description: `Bienvenue dans votre ${interaction.user}, vous pouvez indiquer votre cahier des charges (via la commande /addcdc) pour que **Welz** puisse prendre part de votre commande !`,
+          description: `Bienvenue dans votre ${interaction.user},`,
           color: Colors.INVISIBLE
         })
 
