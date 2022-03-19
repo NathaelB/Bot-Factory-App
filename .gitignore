@@ -68,7 +68,7 @@ environment.yml
 environment.dev.yaml
 environment.prod.yaml
 
-database.sql
+database.sqlite
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
