@@ -6,6 +6,10 @@ export default class User extends BaseModel<User> {
 
   public user_id: string
 
+  public exp: number
+
+  public level: number
+
   @beforeCreate()
   protected createUUID (model: User) {
     model.id = Uuid.generateV4()
