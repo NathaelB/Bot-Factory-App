@@ -1,4 +1,5 @@
 import User from "App/database/models/User";
+import {ObjectResolvable} from "@discord-factory/storage-next/build/types";
 
 export default class UserBuilder {
 
@@ -22,6 +23,11 @@ export default class UserBuilder {
                 level: 1
             })
         }
+    }
+
+    public static async modif (id:string,  data: ObjectResolvable): Promise<{$persisted: boolean}> {
+        const user = await this.get(id)
+        return await user.update(data)
     }
 
     public static async delete (id: string): Promise<{$deleted: boolean}> {
