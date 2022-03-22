@@ -6,9 +6,6 @@ export default class Config {
     private static $instance: Config
     private env: Map<string, any> = new Map()
 
-    constructor() {
-    }
-
     private static getInstance () {
         if (!this.$instance) {
             this.$instance = new Config()
