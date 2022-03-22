@@ -2,6 +2,7 @@ import { Event, BaseEvent } from 'ioc:factory/Core/Event'
 import {GuildMember, Message, MessageEmbed} from 'discord.js'
 import UserBuilder from "App/builder/User";
 import {Colors} from "@discord-factory/colorize";
+import {getRandomInterval} from "App/utils/Random";
 
 @Event('messageCreate')
 export default class OnMessage extends BaseEvent {
@@ -27,7 +28,7 @@ export default class OnMessage extends BaseEvent {
       return
     }
     await UserBuilder.modif(userData.user_id, {
-      exp: userData.exp+ Math.floor(Math.random() * (3 - 1) + 1)
+      exp: userData.exp+ getRandomInterval(1,3)
     })
   }
 }
