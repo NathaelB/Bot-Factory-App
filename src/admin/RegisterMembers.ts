@@ -20,9 +20,6 @@ export default class RegisterMembers extends BaseCommand {
   public async run (interaction: CommandInteraction): Promise<void> {
 
     const members = await interaction.guild!.members.fetch()
-
-    members.map(async (member: GuildMember) => {
-      return await UserBuilder.init(member.user.id)
-    })
+    await Promise.all(members.map((member: GuildMember) => UserBuilder.init(member.user.id)))
   }
 }
