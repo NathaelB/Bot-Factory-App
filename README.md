@@ -23,8 +23,10 @@
 </div>
 
 ###Crédits:
+
 - Auteur: <a href="https://nathaelb.fr">Nathael Bonnal</a>
 - [Framework - Discord Factory](https://discord-factory.com)
+- 
 ## Les prérequis 
 
 Afin que le déployement du bot se fasse au mieux, il faudra sur votre machine :
