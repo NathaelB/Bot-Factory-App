@@ -36,6 +36,8 @@ Afin que le déployement du bot se fasse au mieux, il faudra sur votre machine :
 
 Maintenant que les pré-requis sont installés, nous allons procéder aux téléchargement des 
 dépendances du projet.
+Tout d'abord il faut créer à la racine du projet le fichier : `database.sqlite`
+
 Une commande simple suffit :
 ```
 git clone https://github.com/NathaelB/Bot-Factory-App.git
